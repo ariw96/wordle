@@ -36,14 +36,29 @@ function KeyBoard() {
 			document.removeEventListener("keydown", handleKeyPress); //clean up the event listener when the component is unmounted
 		};
 	}, [handleKeyPress]);
-	const keyboard = keyBoardState.map((item, index) => {
+	const row1 = keyBoardState.map((item, index) => {
+		if(index > 9) return
+		return (
+			<KeyBoardLetter key={index} letter={item.letter} id={item.colorId} />
+		);
+	});
+	const row2 = keyBoardState.map((item, index) => {
+		if(index < 10|| index>18) return
+		return (
+			<KeyBoardLetter key={index} letter={item.letter} id={item.colorId} />
+		);
+	});
+	const row3 = keyBoardState.map((item, index) => {
+		if( index<19) return
 		return (
 			<KeyBoardLetter key={index} letter={item.letter} id={item.colorId} />
 		);
 	});
 	return (
 		<div className="keyboard" onKeyDown={handleKeyPress}>
-			{keyboard}
+		<div className="row1">{row1}</div>	
+		<div className="row2">{row2}</div>	
+		<div className="row3">{row3}</div>	
 		</div>
 	);
 }

@@ -49,7 +49,7 @@ export const GameProvider = (props) => {
 
 	const defultBoard = [word0, word1, word2, word3, word4, word5];
 	const keyBoard = [
-        { letter: "Del" },
+       
 		{ letter: "Q", colorId: "" },
 		{ letter: "W", colorId: "" },
 		{ letter: "E", colorId: "" },
@@ -69,14 +69,14 @@ export const GameProvider = (props) => {
 		{ letter: "J", colorId: "" },
 		{ letter: "K", colorId: "" },
 		{ letter: "L", colorId: "" },
-		
-		{ letter: "Z", colorId: "", clicked: false },
-		{ letter: "X", colorId: "", clicked: false },
-		{ letter: "C", colorId: "", clicked: false },
-		{ letter: "V", colorId: "", clicked: false },
-		{ letter: "B", colorId: "", clicked: false },
-		{ letter: "N", colorId: "", clicked: false },
-		{ letter: "M", colorId: "", clicked: false },
+		{ letter: "Del" },
+		{ letter: "Z", colorId: "" },
+		{ letter: "X", colorId: "" },
+		{ letter: "C", colorId: ""},
+		{ letter: "V", colorId: "" },
+		{ letter: "B", colorId: "" },
+		{ letter: "N", colorId: "" },
+		{ letter: "M", colorId: "" },
 		{ letter: "Ent" },
 	];
 	const [geussedWord, setGeussedWord] = useState([]);

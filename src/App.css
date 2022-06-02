@@ -1,11 +1,25 @@
-.keyboard {
+.row1{
 	display: grid;
 	max-width: 600px;
 	margin: auto;
 	grid-template-columns: repeat(10, 1fr);
 }
+.row2{
+	display: grid;
+	max-width: 600px;
+	margin: auto;
+	grid-template-columns: repeat(9, 1fr);
+}
+.row3{
+	display: grid;
+	max-width: 600px;
+	margin: auto;
+	grid-template-columns: repeat(9, 1fr);
+	align-items: center;
+}
 
 .key {
+	text-align: center;
 	align-items: center;
 	border: 1px solid black;
 	border-radius: 5px;
@@ -17,9 +31,7 @@
 	background-color: white;
 	cursor: pointer;
 }
-.keyboard:nth-child(11) {
-	grid-template-columns: repeat(9, 1fr) 1fr;
-}
+
 
 .key:hover {
 	border: 1px solid #eeeeee;
