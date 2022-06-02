@@ -1,55 +1,54 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState, createContext } from "react";
-
+import { wordGenerater, randomWord } from "./Data";
 export const GameContext = createContext();
 
 export const GameProvider = (props) => {
-	const word0 = [
-		{ letter: "", colorId: "" },
-		{ letter: "", colorId: "" },
-		{ letter: "", colorId: "" },
-		{ letter: "", colorId: "" },
-		{ letter: "", colorId: "" },
+	const defultBoard = [
+		[
+			{ letter: "", colorId: "" },
+			{ letter: "", colorId: "" },
+			{ letter: "", colorId: "" },
+			{ letter: "", colorId: "" },
+			{ letter: "", colorId: "" },
+		],
+		[
+			{ letter: "", colorId: "" },
+			{ letter: "", colorId: "" },
+			{ letter: "", colorId: "" },
+			{ letter: "", colorId: "" },
+			{ letter: "", colorId: "" },
+		],
+		[
+			{ letter: "", colorId: "" },
+			{ letter: "", colorId: "" },
+			{ letter: "", colorId: "" },
+			{ letter: "", colorId: "" },
+			{ letter: "", colorId: "" },
+		],
+		[
+			{ letter: "", colorId: "" },
+			{ letter: "", colorId: "" },
+			{ letter: "", colorId: "" },
+			{ letter: "", colorId: "" },
+			{ letter: "", colorId: "" },
+		],
+		[
+			{ letter: "", colorId: "" },
+			{ letter: "", colorId: "" },
+			{ letter: "", colorId: "" },
+			{ letter: "", colorId: "" },
+			{ letter: "", colorId: "" },
+		],
+		[
+			{ letter: "", colorId: "" },
+			{ letter: "", colorId: "" },
+			{ letter: "", colorId: "" },
+			{ letter: "", colorId: "" },
+			{ letter: "", colorId: "" },
+		],
 	];
-	const word1 = [
-		{ letter: "", colorId: "" },
-		{ letter: "", colorId: "" },
-		{ letter: "", colorId: "" },
-		{ letter: "", colorId: "" },
-		{ letter: "", colorId: "" },
-	];
-	const word2 = [
-		{ letter: "", colorId: "" },
-		{ letter: "", colorId: "" },
-		{ letter: "", colorId: "" },
-		{ letter: "", colorId: "" },
-		{ letter: "", colorId: "" },
-	];
-	const word3 = [
-		{ letter: "", colorId: "" },
-		{ letter: "", colorId: "" },
-		{ letter: "", colorId: "" },
-		{ letter: "", colorId: "" },
-		{ letter: "", colorId: "" },
-	];
-	const word4 = [
-		{ letter: "", colorId: "" },
-		{ letter: "", colorId: "" },
-		{ letter: "", colorId: "" },
-		{ letter: "", colorId: "" },
-		{ letter: "", colorId: "" },
-	];
-	const word5 = [
-		{ letter: "", colorId: "" },
-		{ letter: "", colorId: "" },
-		{ letter: "", colorId: "" },
-		{ letter: "", colorId: "" },
-		{ letter: "", colorId: "" },
-	];
-
-	const defultBoard = [word0, word1, word2, word3, word4, word5];
 	const keyBoard = [
-       
 		{ letter: "Q", colorId: "" },
 		{ letter: "W", colorId: "" },
 		{ letter: "E", colorId: "" },
@@ -72,40 +71,69 @@ export const GameProvider = (props) => {
 		{ letter: "Del" },
 		{ letter: "Z", colorId: "" },
 		{ letter: "X", colorId: "" },
-		{ letter: "C", colorId: ""},
+		{ letter: "C", colorId: "" },
 		{ letter: "V", colorId: "" },
 		{ letter: "B", colorId: "" },
 		{ letter: "N", colorId: "" },
 		{ letter: "M", colorId: "" },
 		{ letter: "Ent" },
 	];
-	const [geussedWord, setGeussedWord] = useState([]);
 	const [keyBoardState, setKeyBoardState] = useState(keyBoard);
 	const [boardState, setBoardState] = useState(defultBoard); //used at gussing board
 	const [curLetterPosition, setCurLetterPosition] = useState(0);
 	const [curWordPosition, setCurWordPosition] = useState(0);
-	const [lettersHasBeenGuessed, setLettersHasBeenGuessed] = useState([]);
+	const [wordSet, setWordSet] = useState(new Set());
 	const correctWord = "stone";
+
+	useEffect(() => {
+		wordGenerater().then((words) => {
+			console.log(words);
+			setWordSet(words);
+			
+		});
+	}, []);
 
 	const enterWord = () => {
 		if (curLetterPosition === 5) {
+			const currentWord = boardState[curWordPosition].map((letter) => letter.letter).join("").toLowerCase();
+			if(!wordSet.has(`${currentWord}\r`)){
+			alert("correct");
+			}
 			const newWord = boardState[curWordPosition].map((word, index) => {
 				const correctArray = correctWord.toLowerCase().split("");
 				if (word.letter.toLowerCase() === correctWord[index].toLowerCase()) {
 					correctArray[index] = "";
-					return { ...word, colorId: "correct" };
+					keyBoardState.find((key) => key.letter === word.letter).colorId =
+						"green";
+					setKeyBoardState(keyBoardState);
+
+					return { ...word, colorId: "green" };
 				} else if (
 					correctWord.toLowerCase().includes(word.letter.toLowerCase()) &&
 					correctArray.includes(word.letter.toLowerCase())
 				) {
-					return { ...word, colorId: "almost" };
+					keyBoardState.find((key) => key.letter === word.letter).colorId =
+						"yellow";
+					setKeyBoardState(keyBoardState);
+					return { ...word, colorId: "yellow" };
 				} else {
-					return { ...word, colorId: "wrong" };
+					keyBoardState.find((key) => key.letter === word.letter).colorId =
+						"gray";
+					setKeyBoardState(keyBoardState);
+					return { ...word, colorId: "gray" };
 				}
 			});
-			setBoardState([...boardState.slice(0, curWordPosition), newWord, ...boardState.slice(curWordPosition + 1)]);
+			setBoardState((prevBoard) => {
+				return [
+					...prevBoard.slice(0, curWordPosition),
+					newWord,
+					...prevBoard.slice(curWordPosition + 1),
+				];
+			});
+
 			setCurWordPosition(curWordPosition + 1);
 			setCurLetterPosition(0);
+			console.log(keyBoardState);
 		}
 	};
 

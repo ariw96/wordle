@@ -69,13 +69,13 @@
 	line-height: 2.5rem;
 	text-align: center;
 }
-#correct {
+#green {
 	background-color: rgb(45, 210, 45);
 }
-#almost {
+#yellow {
 	background-color: rgb(237, 230, 25);
 }
-#wrong {
+#gray {
 	background-color: rgb(135, 128, 128);
 }
 @media only screen and (max-width: 768px) {

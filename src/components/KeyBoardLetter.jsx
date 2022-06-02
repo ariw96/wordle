@@ -3,10 +3,11 @@ import { GameContext } from "./GameContext";
 import { useContext } from "react";
 
 function KeyBoardLetter({ letter, id }) {
-	const { addLetter, deleteLetter, enterWord } = useContext(GameContext);
+	const { addLetter, deleteLetter, enterWord} = useContext(GameContext);
 	const displayLetter = () => {
 		if (letter === "Ent") {
 			enterWord(); //enterWord is a function in the GameContext object
+		
 		} else if (letter === "Del") {
 			deleteLetter(); //deleteLetter is a function in the GameContext object
 		} else {

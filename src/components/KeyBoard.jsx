@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import KeyBoardLetter from "./KeyBoardLetter";
 import { GameContext } from "./GameContext";
 import { useContext } from "react";
-import { keyboard } from "@testing-library/user-event/dist/keyboard";
+
 
 function KeyBoard() {
 	const { addLetter, deleteLetter, enterWord, keyBoardState } = useContext(
@@ -12,7 +12,8 @@ function KeyBoard() {
 	const handleKeyPress = useCallback((e) => {
 		//useCallback to prevent memory leak and prevent rerendering for every key press to good performance
 		if (e.key === "Enter") {
-			enterWord(); //enterWord is a function in the GameContext object
+			enterWord()
+			; //enterWord is a function in the GameContext object
 			return;
 		} else if (e.key === "Backspace") {
 			deleteLetter(); //deleteLetter is a function in the GameContext object
@@ -28,14 +29,14 @@ function KeyBoard() {
 			});
 		
 		}
-	});
+	},[keyBoardState, addLetter, deleteLetter, enterWord]);
 
 	useEffect(() => {
 		document.addEventListener("keydown", handleKeyPress); //add event listener to the document to listen for key presses
 		return () => {
 			document.removeEventListener("keydown", handleKeyPress); //clean up the event listener when the component is unmounted
 		};
-	}, [handleKeyPress]);
+	}, [handleKeyPress]);//useEffect to add and remove event listener
 	const row1 = keyBoardState.map((item, index) => {
 		if(index > 9) return
 		return (
@@ -55,7 +56,7 @@ function KeyBoard() {
 		);
 	});
 	return (
-		<div className="keyboard" onKeyDown={handleKeyPress}>
+		<div className="keyboard" onKeyDown={()=>handleKeyPress}>
 		<div className="row1">{row1}</div>	
 		<div className="row2">{row2}</div>	
 		<div className="row3">{row3}</div>	
