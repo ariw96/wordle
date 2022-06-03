@@ -146,6 +146,7 @@ export const GameProvider = (props) => {
 				setGameStatus({
 					gameOver: true,
 					gameWon: true,
+					theme:"fade-out"
 				});
 			}
 			
@@ -158,9 +159,10 @@ export const GameProvider = (props) => {
 			}
 			setCurWordPosition(curWordPosition + 1);
 			setCurLetterPosition(0);
-		}else{
-		alert("please enter 5 letters");
 		}
+		// else{
+		// alert("please enter 5 letters");
+		// }
 	};
 
 	const deleteLetter = () => {

@@ -6,7 +6,6 @@ function App() {
 	return (
 		<>
 			<GameProvider>
-				<h1 className="text-7xl">wordle</h1>
 				<Home />
 			</GameProvider>
 		</>

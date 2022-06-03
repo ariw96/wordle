@@ -3,21 +3,20 @@ import { GameContext } from "./components/GameContext";
 import GuessBoard from "./components/GuessBoard";
 import KeyBoard from "./components/KeyBoard";
 import GameStatus from "./components/GameStatus";
-
+import NavBar from "./components/NavBar";
+import SideBar from "./components/SideBar";
 function Home() {
-    const { gameStatus, curWordPosition } = useContext(GameContext);
-    
-
+	const { gameStatus } = useContext(GameContext);
 
 	return (
 		<>
-
-				<GameStatus />
-        <div id={gameStatus.theme}>
+			<NavBar />
+			<SideBar />
+			<GameStatus />
+			<div id={gameStatus.theme}>
 				<GuessBoard />
 				<KeyBoard />
-        </div>
-		
+			</div>
 		</>
 	);
 }
