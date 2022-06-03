@@ -12,6 +12,5 @@ export const wordGenerater = async () => {
 export const randomWord = (wordSet) => {
 	const wordArr = Array.from(wordSet);
 	const randomWord = wordArr[Math.floor(Math.random() * wordSet.size)];
-	console.log(randomWord);
 	return randomWord;
 };

@@ -1,16 +1,13 @@
 import React from "react";
-import "./App.css";
-import GuessBoard from "./components/GuessBoard";
-import KeyBoard from "./components/KeyBoard";
+import Home from "./Home";
 import { GameProvider } from "./components/GameContext";
-
+import "./App.css";
 function App() {
 	return (
 		<>
-			<h1>wordle</h1>
 			<GameProvider>
-				<GuessBoard />
-				<KeyBoard />
+				<h1 className="text-7xl">wordle</h1>
+				<Home />
 			</GameProvider>
 		</>
 	);

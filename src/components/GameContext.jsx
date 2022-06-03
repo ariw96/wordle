@@ -78,30 +78,42 @@ export const GameProvider = (props) => {
 		{ letter: "M", colorId: "" },
 		{ letter: "Ent" },
 	];
+	
 	const [keyBoardState, setKeyBoardState] = useState(keyBoard);
 	const [boardState, setBoardState] = useState(defultBoard); //used at gussing board
 	const [curLetterPosition, setCurLetterPosition] = useState(0);
 	const [curWordPosition, setCurWordPosition] = useState(0);
 	const [wordSet, setWordSet] = useState(new Set());
-	const correctWord = "stone";
+	const [correctWord, setCorrectWord] = useState("ari");
+	const[gameStatus,setGameStatus]=useState({
+		gameOver: false,
+		gameWon: false,
+		gameLost: false,
+		theme: "",
+	});
 
 	useEffect(() => {
 		wordGenerater().then((words) => {
-			console.log(words);
+			console.log(words); // IF SOMEONE WANT TO SEE THE VALID WORDS
 			setWordSet(words);
-			
+			setCorrectWord(randomWord(words).slice(0, 5)); //random word SET TO THE CORRECT WORD
 		});
 	}, []);
 
 	const enterWord = () => {
+		console.log(correctWord); // IF SOMEONE WANT TO SEE THE ANSWER
 		if (curLetterPosition === 5) {
-			const currentWord = boardState[curWordPosition].map((letter) => letter.letter).join("").toLowerCase();
-			if(!wordSet.has(`${currentWord}\r`)){
-			alert("correct");
-			}
-			const newWord = boardState[curWordPosition].map((word, index) => {
-				const correctArray = correctWord.toLowerCase().split("");
-				if (word.letter.toLowerCase() === correctWord[index].toLowerCase()) {
+			const gessedWord = boardState[curWordPosition]
+				.map((letter) => letter.letter)
+				.join("")
+				.toLowerCase();
+			// if (!wordSet.has(`${gessedWord}\r`)) {
+			// 	alert("no such word");
+			// }
+			const addWordToBoard = boardState[curWordPosition].map((word, index) => {
+				const currentLetter = word.letter.toLowerCase();
+				const correctArray = correctWord.split("");
+				if (currentLetter === correctWord[index]) {
 					correctArray[index] = "";
 					keyBoardState.find((key) => key.letter === word.letter).colorId =
 						"green";
@@ -109,8 +121,8 @@ export const GameProvider = (props) => {
 
 					return { ...word, colorId: "green" };
 				} else if (
-					correctWord.toLowerCase().includes(word.letter.toLowerCase()) &&
-					correctArray.includes(word.letter.toLowerCase())
+					correctWord.includes(currentLetter) &&
+					correctArray.includes(currentLetter)
 				) {
 					keyBoardState.find((key) => key.letter === word.letter).colorId =
 						"yellow";
@@ -126,14 +138,28 @@ export const GameProvider = (props) => {
 			setBoardState((prevBoard) => {
 				return [
 					...prevBoard.slice(0, curWordPosition),
-					newWord,
+					addWordToBoard,
 					...prevBoard.slice(curWordPosition + 1),
 				];
 			});
-
+              if (correctWord === gessedWord) {
+				setGameStatus({
+					gameOver: true,
+					gameWon: true,
+				});
+			}
+			
+			if (curWordPosition === 5) {
+				setGameStatus({
+					gameOver: true,
+					gameLost: true,
+					theme:"fade-out" 
+				});
+			}
 			setCurWordPosition(curWordPosition + 1);
 			setCurLetterPosition(0);
-			console.log(keyBoardState);
+		}else{
+		alert("please enter 5 letters");
 		}
 	};
 
@@ -158,6 +184,7 @@ export const GameProvider = (props) => {
 				boardState,
 				keyBoardState,
 				curWordPosition,
+				gameStatus,
 				addLetter,
 				deleteLetter,
 				enterWord,
