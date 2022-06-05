@@ -89,6 +89,7 @@ export const GameProvider = (props) => {
 		game: "play",
 		theme: "",
 		card: "You-Won",
+		answer: "",
 	});
 
 	useEffect(() => {
@@ -143,15 +144,16 @@ export const GameProvider = (props) => {
 			});
 			if (correctWord === gessedWord) {
 				setGameStatus({
-					game: "You-Won",
+					game: "Won",
 					theme: "fade-out",
 				});
 			}
 
 			if (curWordPosition === 5) {
 				setGameStatus({
-					game: "lose",
+					game: "Lose",
 					theme: "fade-out",
+					answer: correctWord,
 				});
 			}
 			setCurWordPosition(curWordPosition + 1);

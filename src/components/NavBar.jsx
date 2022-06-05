@@ -24,7 +24,7 @@ function NavBar() {
 
 			<div className="text-3xl mx-2 p-2">
 				<ion-icon name="log-in-outline"></ion-icon>
-				<ion-icon name="reload-outline"></ion-icon>
+				<ion-icon onClick={() => window.location.reload()} name="reload-outline"></ion-icon>
 				<ion-icon name="bar-chart-sharp"></ion-icon>
 			</div>
 		</div>

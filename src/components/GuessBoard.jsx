@@ -25,7 +25,7 @@ function GuessBoard() {
 
 	return (
 		<>
-			<div className="guess-board">
+			<div className="guess-board ">
 				<div className="word0">{row0}</div>
 				<div className="word1">{row1}</div>
 				<div className="word2">{row2}</div>
