@@ -25,14 +25,14 @@ function GuessBoard() {
 
 	return (
 		<>
-		<div className="guess-board">
-			<div className="word0">{row0}</div>
-			<div className="word1">{row1}</div>
-			<div className="word2">{row2}</div>
-			<div className="word3">{row3}</div>
-			<div className="word4">{row4}</div>
-			<div className="word5">{row5}</div>
-		</div>
+			<div className="guess-board">
+				<div className="word0">{row0}</div>
+				<div className="word1">{row1}</div>
+				<div className="word2">{row2}</div>
+				<div className="word3">{row3}</div>
+				<div className="word4">{row4}</div>
+				<div className="word5">{row5}</div>
+			</div>
 		</>
 	);
 }

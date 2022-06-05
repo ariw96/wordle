@@ -78,18 +78,17 @@ export const GameProvider = (props) => {
 		{ letter: "M", colorId: "" },
 		{ letter: "Ent" },
 	];
-	
+
 	const [keyBoardState, setKeyBoardState] = useState(keyBoard);
 	const [boardState, setBoardState] = useState(defultBoard); //used at gussing board
 	const [curLetterPosition, setCurLetterPosition] = useState(0);
 	const [curWordPosition, setCurWordPosition] = useState(0);
 	const [wordSet, setWordSet] = useState(new Set());
 	const [correctWord, setCorrectWord] = useState("ari");
-	const[gameStatus,setGameStatus]=useState({
-		gameOver: false,
-		gameWon: false,
-		gameLost: false,
+	const [gameStatus, setGameStatus] = useState({
+		game: "play",
 		theme: "",
+		card: "You-Won",
 	});
 
 	useEffect(() => {
@@ -142,19 +141,17 @@ export const GameProvider = (props) => {
 					...prevBoard.slice(curWordPosition + 1),
 				];
 			});
-              if (correctWord === gessedWord) {
+			if (correctWord === gessedWord) {
 				setGameStatus({
-					gameOver: true,
-					gameWon: true,
-					theme:"fade-out"
+					game: "You-Won",
+					theme: "fade-out",
 				});
 			}
-			
+
 			if (curWordPosition === 5) {
 				setGameStatus({
-					gameOver: true,
-					gameLost: true,
-					theme:"fade-out" 
+					game: "lose",
+					theme: "fade-out",
 				});
 			}
 			setCurWordPosition(curWordPosition + 1);
