@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState, createContext } from "react";
 import { wordGenerater, randomWord } from "./Data";
 export const GameContext = createContext();
-
+let words = null
 export const GameProvider = (props) => {
 	const defultBoard = [
 		[
@@ -83,7 +83,6 @@ export const GameProvider = (props) => {
 	const [boardState, setBoardState] = useState(defultBoard); //used at gussing board
 	const [curLetterPosition, setCurLetterPosition] = useState(0);
 	const [curWordPosition, setCurWordPosition] = useState(0);
-	const [wordSet, setWordSet] = useState(new Set());
 	const [correctWord, setCorrectWord] = useState("ari");
 	const [gameStatus, setGameStatus] = useState({
 		game: "play",
@@ -91,11 +90,11 @@ export const GameProvider = (props) => {
 		card: "You-Won",
 		answer: "",
 	});
-
 	useEffect(() => {
-		wordGenerater().then((words) => {
+		wordGenerater().then((wordsTmp) => {
+			words = wordsTmp;
 			console.log(words); // IF SOMEONE WANT TO SEE THE VALID WORDS
-			setWordSet(words);
+			// setWordSet(words);
 			setCorrectWord(randomWord(words).slice(0, 5)); //random word SET TO THE CORRECT WORD
 		});
 	}, []);
@@ -107,9 +106,9 @@ export const GameProvider = (props) => {
 				.map((letter) => letter.letter)
 				.join("")
 				.toLowerCase();
-			// if (!wordSet.has(`${gessedWord}\r`)) {
-			// 	alert("no such word");
-			// }
+			if (!words.has(`${gessedWord}\r`)) {
+				alert("no such word");
+			}
 			const addWordToBoard = boardState[curWordPosition].map((word, index) => {
 				const currentLetter = word.letter.toLowerCase();
 				const correctArray = correctWord.split("");

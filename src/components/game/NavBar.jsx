@@ -1,6 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { GameContext } from "./GameContext";
+import { NavLink } from "react-router-dom";
 
 function NavBar() {
 	const { boardState, curWordPosition } = useContext(GameContext); //useContext(GameContext) returns an object with the properties of the GameContext object
@@ -23,8 +24,13 @@ function NavBar() {
 			</div>
 
 			<div className="text-3xl mx-2 p-2">
-				<ion-icon name="log-in-outline"></ion-icon>
-				<ion-icon onClick={() => window.location.reload()} name="reload-outline"></ion-icon>
+				<NavLink to="/login" className="login">
+					<ion-icon name="log-in-outline"></ion-icon>
+				</NavLink>
+				<ion-icon
+					onClick={() => window.location.reload()}
+					name="reload-outline"
+				></ion-icon>
 				<ion-icon name="bar-chart-sharp"></ion-icon>
 			</div>
 		</div>

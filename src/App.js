@@ -1,13 +1,16 @@
 import React from "react";
-import Home from "./Home";
-import { GameProvider } from "./components/GameContext";
+import Home from "./components/Home";
+import { BrowserRouter } from "react-router-dom";
+import Login from "./components/login/Login";
+
 import "./App.css";
 function App() {
 	return (
 		<>
-			<GameProvider>
+		<BrowserRouter>
 				<Home />
-			</GameProvider>
+		</BrowserRouter>
+		
 		</>
 	);
 }
