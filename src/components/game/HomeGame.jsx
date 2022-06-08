@@ -11,7 +11,7 @@ function Home() {
 		<>
 			<GameProvider>
 				<NavBar />
-				<SideBar />
+				{/* <SideBar /> */}
 				<GameStatus />
 				<GuessBoard />
 				<KeyBoard />

@@ -4,7 +4,7 @@ import { GameContext } from "./GameContext";
 import { useContext } from "react";
 
 function KeyBoard() {
-	const { addLetter, deleteLetter, enterWord, keyBoardState } =
+	const { addLetter, deleteLetter, enterWord, keyBoardState ,gameStatus } =
 		useContext(GameContext); //useContext(GameContext) returns an object with the properties of the GameContext object
 
 	const handleKeyPress = useCallback(
@@ -54,7 +54,7 @@ function KeyBoard() {
 		);
 	});
 	return (
-		<div className="keyboard" onKeyDown={() => handleKeyPress}>
+		<div className="keyboard" id={gameStatus.theme} onKeyDown={() => handleKeyPress}>
 			<div className="row1">{row1}</div>
 			<div className="row2">{row2}</div>
 			<div className="row3">{row3}</div>

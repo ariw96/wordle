@@ -6,11 +6,32 @@ import {
 	onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "./firebase-config";
+import axios from "axios";
 export const AuthContext = createContext();
 
 export const AuthProvider = (props) => {
 	const [user, setUser] = useState({});
+	const api = "https://wordle-user-api.herokuapp.com";
+	const [userData, setUserData] = useState([]);
+	const[ data, setData] = useState([]);
+	const [loading, setLoading] = useState(false);
+
+	useEffect(() => {
+		const getData = async () => {
+			setLoading(true);
+			try {
+				const response = await axios.get(api);
+                // setData(response.data.users);
+				console.log(response.data.users);
+			} catch (error) {
+				alert(error);
+			}
+		};
+		getData();
+		setLoading(false);
+	}, []);
 	const creatUser = (email, password) => {
+		
 		return createUserWithEmailAndPassword(auth, email, password);
 	};
 	useEffect(() => {
@@ -26,8 +47,8 @@ export const AuthProvider = (props) => {
 		return signInWithEmailAndPassword(auth, email, password);
 	};
 	const logout = () => {
-		return signOut(auth);
 		setUser({});
+		return signOut(auth);
 	};
 	return (
 		<AuthContext.Provider value={{ creatUser, user, login, logout, setUser }}>

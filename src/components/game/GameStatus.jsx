@@ -8,7 +8,7 @@ function GameStatus() {
 	if (gameStatus.game === "Won") {
 		return (
 			<>
-				<div className="game-over-card">
+				<div className="game-over-card bg-amber-50 ">
 					<h1>You {gameStatus.game}!</h1>
 					<div className="text-5xl"> Number of streaks {curWordPosition}</div>
                 <button className=" bg-green-500 font-semibold text-white py-2 px-2  rounded-xl" onClick={() => window.location.reload()}>Restart</button>
@@ -19,7 +19,7 @@ function GameStatus() {
     else if (gameStatus.game === "Lose") {
         return (
             <>
-                <div className="game-over-card ">
+                <div className="game-over-card bg-amber-50">
                     <h1>You {gameStatus.game}! nice try</h1>
                     <p className="text-5xl my-2"> The answer was </p>
                     <p className="text-6xl font-bold my-2">{gameStatus.answer}</p>

@@ -78,6 +78,37 @@ export const GameProvider = (props) => {
 		{ letter: "M", colorId: "" },
 		{ letter: "Ent" },
 	];
+	const keyBoardHebrew = [
+		{ letter: "Del" },
+		{ letter: "ק", colorId: "" },
+		{ letter: "ר", colorId: "" },
+		{ letter: "א", colorId: "" },
+		{ letter: "ט", colorId: "" },
+		{ letter: "ו", colorId: "" },
+		{ letter: "ן", colorId: "" },
+		{ letter: "ם", colorId: "" },
+		{ letter: "פ", colorId: "" },
+		{ letter: "ש", colorId: "" },
+		{ letter: "ד", colorId: "" },
+		{ letter: "ג", colorId: "" },
+		{ letter: "כ", colorId: "" },
+		{ letter: "ע", colorId: "" },
+		{ letter: "י", colorId: "" },
+		{ letter: "ח", colorId: "" },
+		{ letter: "ל", colorId: "" },
+		{ letter: "ך", colorId: "" },
+		{ letter: "ף", colorId: "" },
+		{ letter: "ז", colorId: "" },
+		{ letter: "ס", colorId: "" },
+		{ letter: "ב", colorId: "" },
+		{ letter: "ה", colorId: "" },
+		{ letter: "נ", colorId: "" },
+		{ letter: "מ", colorId: "" },
+		{ letter: "צ", colorId: "" },
+		{ letter: "ת", colorId: "" },
+		{ letter: "ץ", colorId: "" },
+		{ letter: "Ent" },
+	];
 
 	const [keyBoardState, setKeyBoardState] = useState(keyBoard);
 	const [boardState, setBoardState] = useState(defultBoard); //used at gussing board
@@ -93,8 +124,7 @@ export const GameProvider = (props) => {
 	useEffect(() => {
 		wordGenerater().then((wordsTmp) => {
 			words = wordsTmp;
-			console.log(words); // IF SOMEONE WANT TO SEE THE VALID WORDS
-			// setWordSet(words);
+		
 			setCorrectWord(randomWord(words).slice(0, 5)); //random word SET TO THE CORRECT WORD
 		});
 	}, []);
@@ -108,6 +138,7 @@ export const GameProvider = (props) => {
 				.toLowerCase();
 			if (!words.has(`${gessedWord}\r`)) {
 				alert("no such word");
+				return
 			}
 			const addWordToBoard = boardState[curWordPosition].map((word, index) => {
 				const currentLetter = word.letter.toLowerCase();

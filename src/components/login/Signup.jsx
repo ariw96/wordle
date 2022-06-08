@@ -1,12 +1,13 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Signup() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
-	const { creatUser } = useContext(AuthContext);
+	const { creatUser ,user} = useContext(AuthContext);
 	const navigate = useNavigate();
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -19,6 +20,7 @@ function Signup() {
 			setError(e.message);
 			alert(e.message);
 		}
+	
 	};
 	return (
 		<div  >

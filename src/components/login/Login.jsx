@@ -27,10 +27,10 @@ function Log() {
 				<div className=" flex login  h-screen justify-center">
 					<div className=" p-6 rounded-lg place-self-center shadow-lg bg-white  mx-auto  ">
 				
-						<form>
+						<form onSubmit={handleSubmit}>
 							<div className="form-group mb-6">
 								<label className="form-label inline-block mb-2 text-gray-700">
-									Email:{user.email}
+									Current Email: {user?.email}
 								</label>
 								<input
 									type="email"
@@ -126,7 +126,7 @@ function Log() {
 								</Link>
 							</p>
 						</form>
-						<ion-icon name="log-out-outline">logout</ion-icon>
+						
 					</div>
 				</div>
 			</div>

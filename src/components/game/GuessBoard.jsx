@@ -3,7 +3,7 @@ import GeussBoardLetter from "./GeussBoardLetter";
 import { useContext } from "react";
 import { GameContext } from "./GameContext";
 function GuessBoard() {
-	const { boardState } = useContext(GameContext); //useContext(GameContext) returns an object with the properties of the GameContext object
+	const { boardState ,gameStatus} = useContext(GameContext); //useContext(GameContext) returns an object with the properties of the GameContext object
 	const row0 = boardState[0].map((item, index) => {
 		return <GeussBoardLetter key={index} wordNum={0} letterPos={index} />;
 	});
@@ -25,7 +25,7 @@ function GuessBoard() {
 
 	return (
 		<>
-			<div className="guess-board ">
+			<div className="guess-board " id={gameStatus.theme}>
 				<div className="word0">{row0}</div>
 				<div className="word1">{row1}</div>
 				<div className="word2">{row2}</div>

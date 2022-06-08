@@ -8,19 +8,19 @@
 
 .row1 {
 	display: grid;
-	max-width: 40rem;
+	max-width: 35rem;
 	margin: auto;
 	grid-template-columns: repeat(10, 1fr);
 }
 .row2 {
 	display: grid;
-	max-width: 40rem;
+	max-width: 35rem;
 	margin: auto;
 	grid-template-columns: repeat(9, 1fr);
 }
 .row3 {
 	display: grid;
-	max-width: 40rem;
+	max-width: 35rem;
 	margin: auto;
 	grid-template-columns: repeat(9, 1fr);
 	align-items: center;
@@ -31,9 +31,9 @@
 	align-items: center;
 	border: 1px solid black;
 	border-radius: 0.5rem;
-	margin: 0.5rem;
-	padding: 1rem;
-	font-size: 1em;
+	margin: 0.2rem;
+	padding: 0.5rem;
+	font-size: 1.4rem;
 	font-weight: bold;
 	color: black;
 	background-color: white;
